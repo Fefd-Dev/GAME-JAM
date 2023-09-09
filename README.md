@@ -1,6 +1,6 @@
 # GAME-JAM #
 
-This is a branch used to store diffrent gmaes made under game-jams
+This is a branch used to store diffrent games made under game-jams
 
 ## GAME-JAM log ##
 
