@@ -142,8 +142,8 @@ while running:
     # Check for collision with enemy
     for i in range(len(enemy_x)):
         if (
-            player_x < enemy_x[i] + OBJECT_SIZE
-            and player_x + PLAYER_SIZE > enemy_x[i]
+            player_x + 60 < enemy_x[i] + OBJECT_SIZE
+            and player_x + PLAYER_SIZE - 60 > enemy_x[i]
             and player_y < enemy_y[i] + OBJECT_SIZE
             and player_y + PLAYER_SIZE > enemy_y[i]
         ):
@@ -155,8 +155,8 @@ while running:
     # Check for collision with fuel
     for i in range(len(fuel_x)):
         if (
-            player_x < fuel_x[i] + OBJECT_SIZE
-            and player_x + PLAYER_SIZE > fuel_x[i]
+            player_x  + 60 < fuel_x[i] + OBJECT_SIZE
+            and player_x + PLAYER_SIZE  - 60 > fuel_x[i]
             and player_y < fuel_y[i] + OBJECT_SIZE
             and player_y + PLAYER_SIZE > fuel_y[i]
         ):
