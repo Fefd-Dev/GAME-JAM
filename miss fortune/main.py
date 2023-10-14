@@ -10,6 +10,13 @@ global runing
 global looking_right
 global on_ground
 
+# Assets
+player_left_asset = pygame.image.load('assets/left_cat.png')
+player_right_asset = pygame.image.load('assets/right_cat.png')
+platform_asset = pygame.image.load('assets/Cloud Tileset.png')
+wall_asset = pygame.image.load('assets/wall.png')
+background_asset = pygame.image.load('assets/background.png')
+
 def create_platforms():
     '''Create the platforms'''
     print('create_platforms started')
@@ -32,7 +39,7 @@ def on_platform_check():
     global runing
     platform_id = 0
     while runing:  
-        time.sleep(.01)
+        time.sleep(0.01)
         if player_position[1] + PLAYER_SIZE < platforms[platform_id][1] + platform_height:
             platform_id += 1
         elif platform_id > 0:
@@ -95,11 +102,11 @@ def update_position(object, object_speed):
     if on_ground:
         return
     for i in range(len(object)):
-        if object[0] < 0:
-            object[0] = 0
+        if object[0] < 5:
+            object[0] = 5
             object_speed[0] *= -1
-        elif object[0] > WIDTH - PLAYER_SIZE:
-            object[0] = WIDTH - PLAYER_SIZE
+        elif object[0] > WIDTH - PLAYER_SIZE - 5:
+            object[0] = WIDTH - PLAYER_SIZE - 5
             object_speed[0] *= -1
         object[i] += object_speed[i]
         
@@ -196,15 +203,22 @@ while runing:
     
     # Check if the player is on the bottom of the screen
     on_bottom_check()    
+            
                 
-    # Clear the screen
-    screen.fill((255, 255, 255))
-    
+    # Draw the background
+    screen.blit(background_asset, (0, 0))
     # draw the platforms
     for platform in platforms:
-        pygame.draw.rect(screen, (0, 0, 0), (platform[0], platform[1], platform[2], platform_height))
+        screen.blit(platform_asset, (platform[0], platform[1]), (0, 0, platform[2], 35))
     # Draw the player
-    pygame.draw.rect(screen, (0, 0, 255), (player_position[0], player_position[1], PLAYER_SIZE, PLAYER_SIZE))
+    if looking_right:
+        screen.blit(player_right_asset, (player_position[0], player_position[1]))
+    else:
+        screen.blit(player_left_asset, (player_position[0], player_position[1]))
+    # Draw the walls
+    # for i in range(0, HEIGHT, 10):
+    #     screen.blit(wall_asset, (0, i))
+    #     screen.blit(wall_asset, (WIDTH - 10, i))
 
     # Update the screen
     pygame.display.update()
